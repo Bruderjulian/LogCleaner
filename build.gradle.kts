@@ -29,7 +29,7 @@ dependencies {
 }
 
 group = "com.julizey"
-version = "1.5-SNAPSHOT"
+version = "1.5"
 description = "LogCleaner"
 java.sourceCompatibility = JavaVersion.VERSION_21
 

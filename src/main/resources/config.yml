@@ -1,5 +1,5 @@
-log-cleaning:
-  mode: "days"
-  days: 3
-  keep-logs: 3
-  delete-crash-reports: true
+mode: "days"
+days: 3
+keep-logs: 3
+delete-crash-reports: true
+clean-interval: 1728000L
