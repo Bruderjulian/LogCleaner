@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class LogCleaner extends JavaPlugin {
 
@@ -34,21 +35,25 @@ public class LogCleaner extends JavaPlugin {
     }
 
     getLogger().log(Level.INFO, "LogCleaner enabled! Mode: " + mode);
+    getServer().getScheduler().runTaskAsynchronously(this, this::cleanLogs);
     cleanLogs();
     if (cleanInterval <= 0) return;
-    getServer()
-      .getScheduler()
-      .runTaskTimer(this, this::cleanLogs, 0L, cleanInterval);
+    cleanLogs().runTaskTimerAsynchronously(this, 0L, cleanInterval);
   }
 
-  private void cleanLogs() {
-    cleanDirectory(new File(getServer().getWorldContainer(), "logs"));
+  private BukkitRunnable cleanLogs() {
+    return new BukkitRunnable() {
+      @Override
+      public void run() {
+        cleanDirectory(new File(getServer().getWorldContainer(), "logs"));
 
-    if (deleteCrashReports) {
-      cleanDirectory(
-        new File(getServer().getWorldContainer(), "crash-reports")
-      );
-    }
+        if (deleteCrashReports) {
+          cleanDirectory(
+            new File(getServer().getWorldContainer(), "crash-reports")
+          );
+        }
+      }
+    };
   }
 
   private void cleanDirectory(File directory) {
