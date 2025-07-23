@@ -19,3 +19,7 @@ Java 8 compatible — works on all Minecraft versions from 1.7+
 Keep your server clean and tidy
 Prevent lag when opening folders via FTP clients like WinSCP
 Automate annoying manual cleanup work
+
+# Original
+This is a fork of https://github.com/cymbycode/LogCleaner
+I am only maintaining and updating it. Also adding features when nesessary!
