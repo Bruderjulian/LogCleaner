@@ -1,0 +1,5 @@
+log-cleaning:
+  mode: "days"
+  days: 3
+  keep-logs: 3
+  delete-crash-reports: true
