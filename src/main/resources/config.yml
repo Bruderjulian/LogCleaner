@@ -1,5 +1,14 @@
+# the mode to use for cleaning logs
+# options: "days", "size", "both"
 mode: "days"
+# the maximum number of days to keep logs
 days: 3
+# the maximum number of logs to keep
 keep-logs: 3
+# should delete crash reports
 delete-crash-reports: true
-clean-interval: 1728000L
+# run the cleaner on startup
+run-on-startup: true
+# the interval in days to run the cleaner
+# set to 0 to disable
+clean-interval: 1 # one day

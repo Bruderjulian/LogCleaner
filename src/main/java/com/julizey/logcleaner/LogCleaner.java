@@ -27,18 +27,20 @@ public class LogCleaner extends JavaPlugin {
     days = getConfig().getInt("days", 3);
     keepLogs = getConfig().getInt("keep-logs", 3);
     deleteCrashReports = getConfig().getBoolean("delete-crash-reports", true);
-    cleanInterval = getConfig().getLong("clean-interval", 1728000L);
+    cleanInterval = getConfig().getLong("clean-interval", 1) * 1728000L;
 
     if (!modes.contains(mode)) {
       getLogger().log(Level.WARNING, "Invalid Mode: " + mode);
       return;
     }
-
     getLogger().log(Level.INFO, "LogCleaner enabled! Mode: " + mode);
-    getServer().getScheduler().runTaskAsynchronously(this, this::cleanLogs);
-    cleanLogs();
-    if (cleanInterval <= 0) return;
-    cleanLogs().runTaskTimerAsynchronously(this, 0L, cleanInterval);
+
+    if (getConfig().getBoolean("run-on-startup", true)) {
+      getServer().getScheduler().runTaskAsynchronously(this, this::cleanLogs);
+    }
+    if (cleanInterval > 0) {
+      cleanLogs().runTaskTimerAsynchronously(this, 0L, cleanInterval);
+    }
   }
 
   private BukkitRunnable cleanLogs() {
