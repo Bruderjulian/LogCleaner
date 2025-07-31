@@ -29,8 +29,8 @@ dependencies {
 }
 
 group = "com.julizey"
-version = "1.5"
-description = "LogCleaner"
+version = "2.0-SNAPSHOT"
+description = "LogManager"
 java.sourceCompatibility = JavaVersion.VERSION_21
 
 publishing {
